@@ -21,7 +21,7 @@ jobs:
         IMAGE_ID=${{ github.repository }}/$IMAGE_NAME
 
         # Use Docker `latest` tag convention
-        [ "$VERSION" == "master" ] && VERSION=latest
+        VERSION=latest
 
         echo IMAGE_ID=$IMAGE_ID
         echo VERSION=$VERSION
