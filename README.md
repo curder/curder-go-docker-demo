@@ -1,4 +1,6 @@
-## go docker demo
+## Go Docker Demo
+
+![Docker Image CI](https://github.com/curder/go-docker-demo/workflows/Docker%20Image%20CI/badge.svg)
 
 go项目运行在docker中
 
