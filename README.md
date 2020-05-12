@@ -11,5 +11,7 @@ docker build -t curder/go-docker-demo .
 ## 运行镜像
 
 ```
-docker run -p 8080:8081 -it curder/go-docker-demo
+docker run -p 8080:80 -it curder/go-docker-demo
 ```
+
+> 将容器里的`80`端口映射到宿主机的`8080`端口。
