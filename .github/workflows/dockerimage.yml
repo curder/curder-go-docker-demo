@@ -5,8 +5,6 @@ on:
     branches: [ master ]
   pull_request:
     branches: [ master ]
-env:
-  IMAGE_NAME: go-docker-demo
 
 jobs:
 
@@ -19,9 +17,9 @@ jobs:
     - name: Login to DockerHub Registry
       run: echo ${{ secrets.DOCKERHUB_PASSWORD }} | docker login -u ${{ secrets.DOCKERHUB_USERNAME }} --password-stdin
 
-    - name: Build and Push the Docker image to DockerHuba
+    - name: Build and Push the Docker image to DockerHub
       run: |
-        IMAGE_ID=${{ github.repository }}/$IMAGE_NAME
+        IMAGE_ID=${{ github.repository }}
 
         # Use Docker `latest` tag convention
         VERSION=latest
