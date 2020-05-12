@@ -5,6 +5,8 @@ on:
     branches: [ master ]
   pull_request:
     branches: [ master ]
+env:
+  IMAGE_NAME: go-docker-demo
 
 jobs:
 
@@ -15,4 +17,16 @@ jobs:
     steps:
     - uses: actions/checkout@v2
     - name: Build the Docker image
-      run: docker build . --file Dockerfile --tag curder/go-docker-demo:$(date +%s)
+      run: |
+        IMAGE_ID=${{ github.repository }}/$IMAGE_NAME
+
+        # Use Docker `latest` tag convention
+        [ "$VERSION" == "master" ] && VERSION=latest
+
+        echo IMAGE_ID=$IMAGE_ID
+        echo VERSION=$VERSION
+
+        docker build . --file Dockerfile --tag $IMAGE_ID:$VERSION
+
+    - name: Push image
+        run: docker push $IMAGE_ID:$VERSION
