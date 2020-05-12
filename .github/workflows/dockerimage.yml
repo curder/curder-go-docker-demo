@@ -16,7 +16,10 @@ jobs:
 
     steps:
     - uses: actions/checkout@v2
-    - name: Build and Push the Docker image to DockerHub
+    - name: Login to DockerHub Registry
+        run: echo ${{ secrets.DOCKERHUB_PASSWORD }} | docker login -u ${{ secrets.DOCKERHUB_USERNAME }} --password-stdin
+
+    - name: Build and Push the Docker image to DockerHuba
       run: |
         IMAGE_ID=${{ github.repository }}/$IMAGE_NAME
 
