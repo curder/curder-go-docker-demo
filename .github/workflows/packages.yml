@@ -15,24 +15,11 @@ jobs:
     steps:
     - uses: actions/checkout@v2
 
-    - name: Login to DockerHub Registry
-      run: echo ${{ secrets.DOCKERHUB_PASSWORD }} | docker login -u ${{ secrets.DOCKERHUB_USERNAME }} --password-stdin
-
-    - name: Build and Push the Docker image to DockerHub
-      run: |
-        IMAGE_ID=${{ github.repository }}
-
-        # Use Docker `latest` tag convention
-        VERSION=latest
-
-        echo IMAGE_ID=$IMAGE_ID
-        echo VERSION=$VERSION
-
-        echo "Build image"
-        docker build . --file Dockerfile --tag $IMAGE_ID:$VERSION
-
-        echo "Push image to DockerHub"
-        docker push $IMAGE_ID:$VERSION
+      - name: Login to DockerHub
+        uses: docker/login-action@v1
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
 
     - name: Login to GitHub Container Registry
       uses: docker/login-action@v1
